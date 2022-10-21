@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/script.js"></script>
+    <title>Chiffrement César</title>
+  </head>
+  <body>
+    <div class="mainPage">
+      <h1>Chiffrement César</h1>
+      <div>
+        <div class="form__group field">
+          <input
+            id="inputATransform"
+            type="input"
+            class="form__field"
+            name="toTransform"
+            id="toTransform"
+            pattern="^[A-Z]+$"
+            required
+          />
+          <label for="toTransform" class="form__label"
+            >Texte A transformer</label
+          >
+          <label for="bruteForce">BruteForce ?</label>
+          <input type="checkbox" name="bruteForce" id="bruteForce" />
+          <button onclick="CesarCode(event)">Traduire</button>
+        </div>
+        <div>
+          <label for="decalage">Decalage :</label>
+          <input type="number" name="decalage" id="decalage" />
+        </div>
+      </div>
+      <div class="resultPage">
+        <h2>Resultats :</h2>
+        <p id="results"></p>
+        <ul id="listResult"></ul>
+      </div>
+    </div>
+  </body>
+</html>
