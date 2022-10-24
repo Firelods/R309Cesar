@@ -9,7 +9,7 @@
     <title>Chiffrement César</title>
   </head>
   <body>
-    <div class="mainPage">
+    <form class="mainPage">
       <h1>Chiffrement César</h1>
       <div>
         <div class="form__group field">
@@ -25,20 +25,31 @@
           <label for="toTransform" class="form__label"
             >Texte A transformer</label
           >
-          <label for="bruteForce">BruteForce ?</label>
-          <input type="checkbox" name="bruteForce" id="bruteForce" />
-          <button onclick="CesarCode(event)">Traduire</button>
         </div>
-        <div>
-          <label for="decalage">Decalage :</label>
-          <input type="number" name="decalage" id="decalage" />
+
+        <div class="form__group field decalage">
+          <input
+            class="form__field"
+            type="number"
+            name="decalage"
+            id="decalage"
+            required
+          />
+          <label for="decalage" class="form__label">Decalage :</label>
         </div>
+      </div>
+      <div class="options">
+        <label for="bruteForce">BruteForce ?</label>
+        <input type="checkbox" name="bruteForce" id="bruteForce" />
+        <label for="Exo4">Exo 4 ?</label>
+        <input type="checkbox" name="Exo4" id="Exo4" />
+        <button type="submit" onclick="CesarCode(event)">Traduire</button>
       </div>
       <div class="resultPage">
         <h2>Resultats :</h2>
         <p id="results"></p>
         <ul id="listResult"></ul>
       </div>
-    </div>
+    </form>
   </body>
 </html>

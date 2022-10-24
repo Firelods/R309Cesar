@@ -3,8 +3,8 @@ function CesarCode(event) {
   const results = document.querySelector("#results");
   const decalage = parseInt(document.querySelector("#decalage").value);
   const bruteForce = document.querySelector("#bruteForce").checked;
-  probCharCorpus("A");
-  console.log(bruteForce);
+  const exo4 = document.querySelector("#Exo4").checked;
+  event.preventDefault();
   if (inputATransform.checkValidity()) {
     var textInput = inputATransform.value;
     if (bruteForce) {
@@ -14,6 +14,23 @@ function CesarCode(event) {
         li.appendChild(document.createTextNode(transformToCesar(textInput, i)));
         ul.appendChild(li);
       }
+    } else if (exo4) {
+      var dict = readTextFile("assets/frequence_francais.txt");
+      var dict2 = turnDictInProb(dict);
+      var proba = [];
+      for (var i = 0; i <= 26; i++) {
+        var probaChar = 0;
+        for (var key in dict2) {
+          probaChar += Math.abs(
+            charProbInMsg(key, transformToCesar(textInput, i)) -
+            dict2[key]
+          );
+        }
+        proba.push(probaChar);
+      }
+      var min = Math.min(...proba);
+      var index = proba.indexOf(min);
+      results.innerHTML = transformToCesar(textInput, index);
     } else {
       results.textContent = transformToCesar(textInput, decalage);
     }
@@ -45,21 +62,18 @@ function readTextFile(file) {
             dict[lineSplitted[0]] = lineSplitted[1];
           }
         });
-        console.log(dict);
-        return dict;
       }
     }
   };
   rawFile.send(null);
+  return dict;
 }
 
 function turnDictInProb(dict) {
   var sum = 0;
   for (var key in dict) {
     sum += parseInt(dict[key]);
-    console.log(dict[key]);
   }
-  console.log(sum);
   for (var key in dict) {
     dict[key] = parseInt(dict[key]) / sum;
   }
@@ -74,9 +88,4 @@ function charProbInMsg(char, msg) {
     }
   }
   return appear / msg.length;
-}
-
-function probCharCorpus(char) {
-  var dict = readTextFile("assets/frequence_francais.txt");
-  console.log(dict);
 }
